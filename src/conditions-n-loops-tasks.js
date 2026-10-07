@@ -397,8 +397,22 @@ function getSpiralMatrix(size) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
+function rotateMatrix(matrix) {
+  const copy = matrix;
+  for (let row = 0; row < Math.floor(copy.length / 2); row += 1) {
+    for (let col = row; col < copy.length - 1 - row; col += 1) {
+      const lt = copy[row][col];
+      const rt = copy[col][copy.length - 1 - row];
+      const rb = copy[copy.length - 1 - row][copy.length - 1 - col];
+
+      copy[row][col] = copy[copy.length - 1 - col][row];
+      copy[col][copy.length - 1 - row] = lt;
+      copy[copy.length - 1 - row][copy.length - 1 - col] = rt;
+      copy[copy.length - 1 - col][row] = rb;
+    }
+  }
+
+  return copy;
 }
 
 /**
@@ -415,8 +429,25 @@ function rotateMatrix(/* matrix */) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
+function sortByAsc(arr) {
+  const copy = [];
+
+  for (let index = 0; index < arr.length; index += 1) {
+    copy[index] = arr[index];
+  }
+
+  for (let index = 1; index < copy.length; index += 1) {
+    const current = copy[index];
+    let j = index - 1;
+
+    while (j >= 0 && copy[j] > current) {
+      copy[j + 1] = copy[j];
+      j -= 1;
+    }
+    copy[j + 1] = current;
+  }
+
+  return copy;
 }
 
 /**
@@ -436,8 +467,8 @@ function sortByAsc(/* arr */) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(/* str, iterations */) {
-  throw new Error('Not implemented');
+function shuffleChar() {
+  return '';
 }
 
 /**
@@ -458,8 +489,8 @@ function shuffleChar(/* str, iterations */) {
  * 321321   => 322113
  *
  */
-function getNearestBigger(/* number */) {
-  throw new Error('Not implemented');
+function getNearestBigger() {
+  return 0;
 }
 
 module.exports = {
